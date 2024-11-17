@@ -1,0 +1,70 @@
+{
+    "name": "axleus/axleus-tooling",
+    "description": "Builds on mezzio/mezzio-tooling",
+    "license": "BSD-3-Clause",
+    "keywords": [
+        "axleus",
+        "mezzio",
+        "axleus cli tooling"
+    ],
+    "authors": [
+        {
+            "name": "Joey Smith",
+            "email": "jsmith@webinertia.net",
+            "homepage": "https://github.com/axleus/message/discussions"
+        }
+    ],
+    "suggest": {
+    },
+    "require": {
+        "php": "~8.1.0 || ~8.2.0 || ~8.3.0",
+        "axleus/axleus-core": "dev-master",
+        "mezzio/mezzio-tooling": "^2.9.0"
+    },
+    "require-dev": {
+        "laminas/laminas-coding-standard": "^2.5",
+        "phpunit/phpunit": "^10.2",
+        "psalm/plugin-phpunit": "^0.18.4",
+        "roave/security-advisories": "dev-master",
+        "vimeo/psalm": "^5.14"
+    },
+    "extra": {
+        "laminas": {
+            "config-provider": "Axleus\\Tooling\\ConfigProvider"
+        }
+    },
+    "autoload": {
+        "psr-4": {
+            "Axleus\\Tooling\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "AxleusTest\\Tooling\\": "test/"
+        }
+    },
+    "scripts": {
+        "check": [
+            "@cs-check",
+            "@static-analysis",
+            "@test"
+        ],
+        "cs-check": "phpcs",
+        "cs-fix": "phpcbf",
+        "static-analysis": "psalm --shepherd --stats",
+        "test": "phpunit --colors=always --testsuite \"unit test\"",
+        "test-coverage": "phpunit --colors=always --coverage-clover clover.xml",
+        "test-integration": "phpunit --colors=always --testsuite \"integration test\""
+    },
+    "config": {
+        "sort-packages": true,
+        "platform": {
+            "php": "8.0.99"
+        },
+        "allow-plugins": {
+            "laminas/laminas-component-installer": true,
+            "composer/package-versions-deprecated": true,
+            "dealerdirect/phpcodesniffer-composer-installer": true
+        }
+    }
+}
