@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Axleus\Tooling\Handler;
 
+use Axleus\Tooling\ConfigInjectionDelegatorDetectorTrait;
 use Axleus\Tooling\Template\CreateTemplate;
 use Mezzio\Tooling\CreateHandler\CreateHandler;
 use Mezzio\Tooling\TemplateResolutionTrait;

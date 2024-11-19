@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Axleus\Tooling\Template;
 
 use ArrayAccess;
+use Axleus\Htmx\View\Renderer\HtmxRenderer;
 use Mezzio\LaminasView\LaminasViewRenderer;
 use Mezzio\Plates\PlatesRenderer;
 use Mezzio\Tooling\CreateHandler\Template;
@@ -39,6 +40,7 @@ final class CreateTemplate
      * @var list<class-string>
      */
     private const KNOWN_RENDERERS = [
+        HtmxRenderer::class,
         PlatesRenderer::class,
         TwigRenderer::class,
         LaminasViewRenderer::class,
@@ -91,13 +93,34 @@ final class CreateTemplate
             $templateSuffix ?: $this->getTemplateSuffixFromConfig($rendererType, $config)
         );
 
-        file_put_contents(
-            $templateFile,
-            sprintf(
-                TemplateSkeletons::HTMX_SKELETON,
-                $templateName
-            )
-        );
+        $result = match ($rendererType) {
+            // Support Axleus\Htmx
+            HtmxRenderer::class => file_put_contents(
+                $templateFile,
+                sprintf(
+                    TemplateSkeletons::HTMX_SKELETON,
+                    $templateName
+                )
+            ),
+            // All other types get a generic template
+            default => file_put_contents(
+                $templateFile,
+                sprintf(
+                    sprintf(
+                        TemplateSkeletons::GENERIC_SKELETON,
+                        $handler
+                    ),
+                    $templateName
+                )
+            ),
+        };
+        // file_put_contents(
+        //     $templateFile,
+        //     sprintf(
+        //         TemplateSkeletons::HTMX_SKELETON,
+        //         $templateName
+        //     )
+        // );
 
         return new Template(
             $templateFile,

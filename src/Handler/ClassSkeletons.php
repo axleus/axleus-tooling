@@ -58,7 +58,7 @@ class ClassSkeletons
 
         namespace %namespace%;
 
-        use Core\Handler\HandlerTrait;
+        use Axleus\Core\Handler\HandlerTrait;
         use Psr\Http\Message\ResponseInterface;
         use Psr\Http\Message\ServerRequestInterface;
         use Psr\Http\Server\RequestHandlerInterface;
@@ -80,11 +80,10 @@ class ClassSkeletons
                 $data = [
                     'title' => '%template-name%',
                 ];
-                $model = $request->getAttribute(ModelInterface::class);
-                $model->setVariables($data);
+
                 return new HtmlResponse($this->renderer->render(
                     '%template-namespace%::%template-name%',
-                    $model
+                    $data
                 ));
             }
 
