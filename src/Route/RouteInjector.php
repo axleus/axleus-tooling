@@ -4,7 +4,7 @@ declare(strict_types=1);
 // Original namespace Mezzio\Tooling\Factory
 namespace Axleus\Tooling\Route;
 
-use Axleus\Core\Config\Writer\PhpArray;
+use Axleus\ConfigManager\Writer\PhpArray;
 use Fig\Http\Message\RequestMethodInterface as Http;
 use Laminas\Config\Factory;
 use Laminas\Filter\Word\SeparatorToSeparator;

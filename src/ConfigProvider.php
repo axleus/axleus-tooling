@@ -18,8 +18,8 @@ class ConfigProvider
     {
         return [
             'commands' => [
-                'mezzio:handler:crud' => Handler\CreateCrudHandlerCommand::class,
-                'mezzio:route:create' => Route\CreateRouteCommand::class,
+                'mezzio:crudhandler:create' => Handler\CreateCrudHandlerCommand::class,
+                'mezzio:route:create'       => Route\CreateRouteCommand::class,
             ],
         ];
     }
